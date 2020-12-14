@@ -1,25 +1,16 @@
 /* eslint-disable linebreak-style */
 const { Router } = require('express');
+const postController = require('../controllers/posts');
 
 const router = Router();
 
 router.route('/')
-  .get((req, res) => {
-    res.json('Hello world');
-  })
-  .post((req, res) => {
-    res.json('post post');
-  });
+  .get(postController.getPosts)
+  .post(postController.insertPost);
 
 router.route('/:id')
-  .get((req, res) => {
-    res.json({ message: 'get one post', id: req.params.id });
-  })
-  .put((req, res) => {
-    res.json({ message: 'update one post', id: req.params.id });
-  })
-  .delete((req, res) => {
-    res.json({ message: 'delete one post', id: req.params.id });
-  });
+  .get(postController.getPost)
+  .put(postController.putPost)
+  .delete(postController.deletePost);
 
 module.exports = router;
