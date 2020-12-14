@@ -24,7 +24,7 @@ app.use('/profile', express.static('upload/images'));
 app.use(express.json());
 app.use(express.urlencoded());
 
-mongoose.connect('mongodb://localhost:27017/newPost', {
+mongoose.connect('mongodb://localhost:27017/fakeapi', {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
