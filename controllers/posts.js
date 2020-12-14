@@ -19,7 +19,7 @@ const getPosts = async (req, res) => {
 
 const getPost = async (req, res) => {
   try {
-    const id = req.params.id;
+    const { id } = req.params.id;
     const post = await Post.findById(id);
     res.status(200).json(post);
   } catch (error) {
@@ -46,9 +46,9 @@ const putPost = (req, res) => {
 
 const deletePost = async (req, res) => {
   try {
-    const id = req.params.id;
+    const { id } = req.params.id;
     const deletePost = await Post.remove({ _id: id });
-    res.status(200).json({ id: id });
+    res.status(200).json({ id });
   } catch (error) {
     res.status(404).json(error);
   }
