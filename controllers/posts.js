@@ -1,7 +1,14 @@
 /* eslint-disable linebreak-style */
-// const Post = require('../models/posts');
+const Post = require('../models/posts');
 
-const getPosts = (req, res) => {
+// const handleError = (error) => {
+//   const errors = {
+//     title: '',
+//     body: '',
+//   };
+//   if(error.message.includes('Post validetion failded'))
+// };
+const getPosts = async (req, res) => {
   res.json('Hello world');
 };
 
@@ -9,8 +16,17 @@ const getPost = (req, res) => {
   res.json({ message: 'get one post', id: req.params.id });
 };
 
-const insertPost = (req, res) => {
-  res.json('post post');
+const insertPost = async (req, res) => {
+  try {
+    const post = {
+      title: req.body.title,
+      body: req.body.body,
+    };
+    const postSaved = await Post.create(post);
+    res.status(200).json(postSaved);
+  } catch (error) {
+    res.status(4040).json(error);
+  }
 };
 
 const putPost = (req, res) => {

@@ -27,6 +27,7 @@ app.use(express.urlencoded());
 mongoose.connect('mongodb://localhost:27017/newPost', {
   useCreateIndex: true,
   useNewUrlParser: true,
+  useUnifiedTopology: true,
 })
   .then(res => { console.log(res); })
   .catch(err => { console.log(err); });
