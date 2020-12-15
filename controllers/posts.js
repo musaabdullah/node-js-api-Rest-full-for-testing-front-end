@@ -1,13 +1,18 @@
 /* eslint-disable linebreak-style */
 const Post = require('../models/posts');
 
-// const handleError = (error) => {
-//   const errors = {
-//     title: '',
-//     body: '',
-//   };
-//   if(error.message.includes('Post validetion failded'))
-// };
+const handleError = (error) => {
+  const errors = {
+    title: '',
+    body: '',
+  };
+  if (error.message.includes('Post validetion failded')) {
+    Object.values(error.errors).forEach(({ properties }) => {
+      errors[properties.path] = properties.message;
+    });
+  }
+};
+
 const getPosts = async (req, res) => {
   try {
     const posts = await Post.find();
@@ -50,7 +55,8 @@ const deletePost = async (req, res) => {
     const deletePost = await Post.remove({ _id: id });
     res.status(200).json({ id });
   } catch (error) {
-    res.status(404).json(error);
+    const errors = handleError(error);
+    res.status(404).json(errors);
   }
 };
 
